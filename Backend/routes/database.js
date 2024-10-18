@@ -1,8 +1,12 @@
 const mysql = require('mysql');
+require("dotenv").config();
+
 var pool  = mysql.createPool({
   connectionLimit : 10,
-  host            : 'localhost',
-  user            : 'root',
-  password        : '',
-  database        : '13a_konyvtar'
+  host            : process.env.DBHOST,
+  user            : process.env.DBUSER,
+  password        : process.env.DBPASS,
+  database        : process.env.DBNAME
 });
+
+module.exports = mysql, pool
