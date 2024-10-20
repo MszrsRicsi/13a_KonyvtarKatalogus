@@ -1,0 +1,35 @@
+<div id="background-overlay">
+    <div class="input-container mb-3">
+        <h1 class="text-center p-3">Authors linked to books</h1>
+
+        <select class="form-select p-3 mb-3">
+            <option selected>Select an author..</option>
+          </select>
+    
+        <select class="form-select p-3 mb-3">
+            <option selected>Select a book..</option>
+        </select>
+        
+        <button class="btn btn-primary mb-3" onclick="ConnectAuthorToBook()">Link author to book</button>
+        <button class="btn btn-secondary mb-3" onclick="Render('selection')">Back to main page</button>
+
+        <p id="totalConnectionsLabel">Total: 0 connection(s).</p>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <th>Name</th>
+            <th>Book</th>
+            <th class="text-end">Operations</th>
+        </thead>
+
+        <tbody id="connectionsTableBody">
+
+        </tbody>
+
+        <tfoot>
+
+        </tfoot>
+    </table>
+    <br>
+</div>

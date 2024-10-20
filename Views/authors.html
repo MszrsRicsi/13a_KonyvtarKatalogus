@@ -1,0 +1,61 @@
+<div id="background-overlay">
+    <div class="input-container mb-3">
+        <h1 class="text-center p-3">Authors</h1>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="authorName" maxlength="40" placeholder="Name">
+            <label for="authorName">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="authorBirthDate" placeholder="Birth date">
+            <label for="authorBirthDate">Birth date</label>
+        </div>
+
+        <button class="btn btn-primary mb-3" onclick="AddAuthor()">Add new author</button>
+        <button class="btn btn-secondary mb-3" onclick="Render('selection')">Back to main page</button>
+
+        <p id="totalAuthorsLabel">Total: 0 author(s).</p>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <th>Name</th>
+            <th class="text-center">Birth</th>
+            <th class="text-end">Operations</th>
+        </thead>
+
+        <tbody id="authorsTableBody">
+            
+        </tbody>
+
+        <tfoot>
+
+        </tfoot>
+    </table>
+    <br>
+</div>
+  
+<!-- Modal -->
+<div class="modal fade" id="authorsModal" tabindex="-1" aria-labelledby="authorsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="authorsModalLabel">Editing (Author's name)</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="authorModalName" maxlength="40" placeholder="Name">
+                    <label for="authorModalName">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="authorModalBirthDate" placeholder="Birth date">
+                    <label for="authorModalBirthDate">Birth date</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="authorModalSaveBTN" data-bs-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

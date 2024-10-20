@@ -1,10 +1,19 @@
 const ServerUrl = "http://localhost:3000";
-
 var xhr = new XMLHttpRequest();
-/*xhr.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-   document.getElementById("demo").innerHTML = this.responseText;
+
+async function Render(view){
+  let main = document.querySelector('main');
+  main.innerHTML = await (await fetch(`Views/${view}.html`)).text();
+
+  switch (view)
+  {
+    case "authors":
+      GetAuthors();
+      break;
+    case "books":
+      GetBooks();
+      break;
   }
-};*/
-xhr.open("GET", `${ServerUrl}/books`, true);
-xhr.send();
+};
+
+Render("selection");
