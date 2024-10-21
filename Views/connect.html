@@ -2,11 +2,11 @@
     <div class="input-container mb-3">
         <h1 class="text-center p-3">Authors linked to books</h1>
 
-        <select class="form-select p-3 mb-3">
+        <select class="form-select p-3 mb-3" id="connectSelectAuthors">
             <option selected>Select an author..</option>
           </select>
     
-        <select class="form-select p-3 mb-3">
+        <select class="form-select p-3 mb-3" id="connectSelectBooks">
             <option selected>Select a book..</option>
         </select>
         
@@ -32,4 +32,29 @@
         </tfoot>
     </table>
     <br>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="connectionsModal" tabindex="-1" aria-labelledby="connectionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="connectionsModalLabel">Editing (Book's title)</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select class="form-select p-3 mb-3" id="connectionsModalName">
+                    <option selected>Select an author..</option>
+                  </select>
+            
+                <select class="form-select p-3 mb-3" id="connectionsModalBook">
+                    <option selected>Select a book..</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="connectionsModalSaveBTN" data-bs-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>

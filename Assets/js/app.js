@@ -13,6 +13,9 @@ async function Render(view){
     case "books":
       GetBooks();
       break;
+    case "connect":
+      FillSelectOptions();
+      break;
   }
 };
 
