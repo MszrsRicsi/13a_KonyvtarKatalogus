@@ -1,3 +1,5 @@
+let books = "";
+
 function GetBooks()
 {
     document.querySelector("#booksTableBody").innerHTML = "";
@@ -9,6 +11,8 @@ function GetBooks()
         if (xhr.readyState == 4 && xhr.status == 200) {
             let bookTableBody = document.querySelector("#booksTableBody");
             let numOfBooks = 0;
+
+            books = JSON.parse(xhr.responseText);
 
             JSON.parse(xhr.responseText).forEach(book => {
                 numOfBooks++;
@@ -63,6 +67,68 @@ function GetBooks()
             document.querySelector("#totalBooksLabel").innerHTML = `Total: ${numOfBooks} book(s).`;
         }
     };
+}
+
+function FilterBooks()
+{
+    document.querySelector("#booksTableBody").innerHTML = "";
+
+    let numOfBooks = 0;
+    books.forEach(book => {
+        if (book.title.includes(document.querySelector("#filter").value) || book.releaseDate.includes(document.querySelector("#filter").value) || book.ISBN.includes(document.querySelector("#filter").value))
+        {
+            let bookTableBody = document.querySelector("#booksTableBody");
+            
+            numOfBooks++;
+
+            let tr = document.createElement("tr");
+
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+            let td3 = document.createElement("td");
+            let td4 = document.createElement("td");
+
+            let editBTN = document.createElement("button");
+            let deleteBTN = document.createElement("button");
+
+            let editIcon = document.createElement("i");
+            editIcon.setAttribute("class", "bi bi-pencil");
+
+            editBTN.appendChild(editIcon);
+
+            let deleteIcon = document.createElement("i");
+            deleteIcon.setAttribute("class", "bi bi-trash");
+
+            deleteBTN.appendChild(deleteIcon);
+
+            editBTN.classList.add("btn", "btn-warning", "me-1");
+            deleteBTN.classList.add("btn", "btn-danger");
+
+            editBTN.setAttribute("data-bs-toggle", "modal");
+            editBTN.setAttribute("data-bs-target", "#bookModal");
+
+            editBTN.onclick = () => {EditBookPopUp(book)};
+            deleteBTN.onclick = () => {DeleteBook(book)};
+                
+            td1.innerHTML = book.title;
+            td2.innerHTML = String(book.releaseDate).split('T')[0];
+            td3.innerHTML = book.ISBN;
+            td4.appendChild(editBTN);
+            td4.appendChild(deleteBTN);
+
+            td2.classList.add("text-center");
+            td3.classList.add("text-center");
+            td4.classList.add("text-end");
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            tr.appendChild(td4);
+
+            bookTableBody.appendChild(tr);
+        }});
+
+    document.querySelector("#totalBooksLabel").innerHTML = `Total: ${numOfBooks} book(s).`;
 }
 
 function AddBook()

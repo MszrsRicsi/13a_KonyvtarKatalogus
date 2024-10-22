@@ -2,7 +2,6 @@ const uuid = require("uuid");
 const router = require("express").Router();
 const db = require("./database");
 
-//Get all connections.
 router.get("/", (req, res) => {
     db.query(`SELECT book_authors.id, books.title, authors.name FROM book_authors, books, authors WHERE books.id = book_authors.bookID AND book_authors.authorID = authors.id`, (err, results) => {
         if (err)
@@ -94,7 +93,7 @@ router.patch("/:id", (req, res) => {
             return;
         }
 
-        db.query(`UPDATE book_authors SET authorID = ?, bookID = ? WHERE id = ?`, [req.params.id, req.body.newAuthorID, req.body.newBookID], (subErr, subResults) => {
+        db.query(`UPDATE book_authors SET authorID = ?, bookID = ? WHERE id = ?`, [req.body.newAuthorID, req.body.newBookID, req.params.id], (subErr, subResults) => {
             if (subErr)
             {
                 res.status(500).send("Error while trying to access the database!");

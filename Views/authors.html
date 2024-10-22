@@ -13,6 +13,11 @@
         <button class="btn btn-primary mb-3" onclick="AddAuthor()">Add new author</button>
         <button class="btn btn-secondary mb-3" onclick="Render('selection')">Back to main page</button>
 
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="filter" oninput="FilterAuthors()" placeholder="Search..">
+            <label for="filter">Search..</label>
+        </div>
+
         <p id="totalAuthorsLabel">Total: 0 author(s).</p>
     </div>
 
