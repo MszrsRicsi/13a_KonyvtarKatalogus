@@ -46,7 +46,7 @@ function FillSelectOptions()
     }
 }
 
-function FilterConnections()
+function CreateAndFilterConnections()
 {
     document.querySelector("#connectionsTableBody").innerHTML = "";
 
@@ -106,65 +106,14 @@ function FilterConnections()
 
 function GetConnections()
 {
-    document.querySelector("#connectionsTableBody").innerHTML = "";
-
     xhr.open("GET", `${ServerUrl}/connect`, true);
     xhr.send();
 
     xhr.onreadystatechange = () => {
-        let connectionsTableBody = document.querySelector("#connectionsTableBody");
-        let numOfConnections = 0;
-
         if (xhr.readyState == 4 && xhr.status == 200) {
             connections = JSON.parse(xhr.responseText);
 
-            JSON.parse(xhr.responseText).forEach(connection => {
-                numOfConnections++;
-
-                let tr = document.createElement("tr");
-            
-                let td1 = document.createElement("td");
-                let td2 = document.createElement("td");
-                let td3 = document.createElement("td");
-
-                let editBTN = document.createElement("button");
-                let deleteBTN = document.createElement("button");
-                
-                let editIcon = document.createElement("i");
-                editIcon.setAttribute("class", "bi bi-pencil");
-
-                editBTN.appendChild(editIcon);
-
-                let deleteIcon = document.createElement("i");
-                deleteIcon.setAttribute("class", "bi bi-trash");
-
-                deleteBTN.appendChild(deleteIcon);
-
-                editBTN.classList.add("btn", "btn-warning", "me-1");
-                deleteBTN.classList.add("btn", "btn-danger");
-
-                editBTN.setAttribute("data-bs-toggle", "modal");
-                editBTN.setAttribute("data-bs-target", "#connectionsModal");
-
-                editBTN.onclick = () => {EditConnectionPopUp(connection)};
-                deleteBTN.onclick = () => {DeleteConnection(connection)};
-
-                td1.innerHTML = connection.name;
-                td2.innerHTML = connection.title;
-        
-                td3.appendChild(editBTN);
-                td3.appendChild(deleteBTN);
-
-                td3.classList.add("text-end");
-
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td3);
-
-                connectionsTableBody.appendChild(tr);
-            });
-
-            document.querySelector("#totalConnectionsLabel").innerHTML = `Total: ${numOfConnections} connection(s)`;
+            CreateAndFilterConnections();
         }
     }
 }
@@ -192,8 +141,8 @@ function ConnectAuthorToBook()
         }
     };
 
-    document.querySelector("#connectSelectAuthors").value = "";
-    document.querySelector("#connectSelectBooks").value = "";
+    document.querySelector("#connectSelectAuthors").selectedIndex = 0;
+    document.querySelector("#connectSelectBooks").selectedIndex = 0;
 }
 
 function EditConnectionPopUp(connection)
